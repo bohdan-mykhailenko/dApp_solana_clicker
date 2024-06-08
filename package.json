@@ -1,23 +1,30 @@
 {
   "name": "solana-app",
-  "private": true,
-  "scripts": {
-    "build:web": "turbo run build --filter=web",
-    "dev:web": "turbo run dev --filter=web",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky"
-  },
+  "version": "1.0.0",
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/eslint-config": "1.0.0",
+    "@repo/typescript-config": "1.0.0",
     "husky": "9.0.11",
     "prettier": "^3.2.5",
     "syncpack": "^12.3.0",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "private": true,
+  "scripts": {
+    "build:web": "turbo run build --filter=web",
+    "dev:web": "turbo run dev --filter=web",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo lint",
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky install",
+    "syncpack:fix-mismatches": "pnpm exec syncpack fix-mismatches",
+    "syncpack:format": "pnpm exec syncpack format",
+    "syncpack:list": "pnpm exec syncpack list",
+    "syncpack:list-mismatches": "pnpm exec syncpack list-mismatches",
+    "syncpack:update": "pnpm exec syncpack update"
   }
 }
