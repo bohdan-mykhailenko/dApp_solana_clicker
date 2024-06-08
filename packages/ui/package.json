@@ -14,9 +14,8 @@
     "typescript": "^5.4.5"
   },
   "exports": {
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
+    "./components": "./src/components/index.ts",
+    "./providers": "./src/providers/index.ts"
   },
   "private": true,
   "scripts": {
