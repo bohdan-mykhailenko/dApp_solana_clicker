@@ -57,11 +57,11 @@
 
 2. ### Naming
 
-- Write a `FULL NAME` of variables, functions, files, etc.
+- Write a FULL NAME of variables, functions, files, etc.
 - Examples
   - initializeInterceptors.ts
   - onCreateReversedTransactionNode()
-- Use 'is\*' or `has\*` prefixex for state naming
+- Use 'is\*' or 'has\*' prefixex for state naming
 - Examples
   - isActive
   - hasUserTransaction
