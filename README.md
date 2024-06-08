@@ -26,7 +26,7 @@
 
 - Follow [git-flow](https://datasift.github.io/gitflow/IntroducingGitFlow.html)
 - Branch name format:
-  - **<git_flow_prefix>/<client|onchain>/<task-description>**
+  - **<git_flow_prefix>/<client | onchain>/<task_description>**
 - Examples
   - feature/client/add-wallet-provider
   - build/onchain/setup-cargo
