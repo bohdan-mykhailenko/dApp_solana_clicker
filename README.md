@@ -4,19 +4,18 @@
 
 - ### Client side
 
-  - Next.js (React framework)
-  - pnpm (package manager)
-  - deploy on Vercel
+  - `Next.js` (React framework)
+  - `pnpm` (package manager)
+  - deploy on `Vercel`
 
 - ### Onchain side
 
-  - Anchor (Rust framework)
-  - cargo (package manager)
-  - deploy on Solana
+  - `Anchor` (Rust framework) -`cargo` (package manager)
+  - deploy on `Solana`
 
 - ### JSON RPC layer
 
-  - @solana/web3.js (sdk for js)
+  - `@solana/web3.js` (sdk for js)
 
 ![alt text](image.png)
 
