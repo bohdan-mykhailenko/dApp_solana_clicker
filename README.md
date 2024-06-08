@@ -10,7 +10,8 @@
 
 - ### Onchain side
 
-  - `Anchor` (Rust framework) -`cargo` (package manager)
+  - `Anchor` (Rust framework)
+  - `cargo` (package manager)
   - deploy on `Solana`
 
 - ### JSON RPC layer
