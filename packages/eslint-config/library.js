@@ -4,8 +4,12 @@ const project = resolve(process.cwd(), "tsconfig.json");
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["eslint:recommended", "prettier", "eslint-config-turbo"],
-  plugins: ["only-warn"],
+  extends: [
+    "airbnb-typescript/base",
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "prettier",
+    "turbo"],
   globals: {
     React: true,
     JSX: true,
@@ -21,14 +25,30 @@ module.exports = {
     },
   },
   ignorePatterns: [
-    // Ignore dotfiles
     ".*.js",
     "node_modules/",
     "dist/",
   ],
   overrides: [
     {
-      files: ["*.js?(x)", "*.ts?(x)"],
+      files: ["*.js", "*.ts"],
     },
   ],
+  rules: {
+    "import/no-extraneous-dependencies": "off",
+    "no-console": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+  }
 };
