@@ -16,6 +16,7 @@
   "private": true,
   "scripts": {
     "build:web": "turbo run build --filter=web-client",
+    "clean:cache": "pnpm store prune",
     "dev:web": "turbo run dev --filter=web-client",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo lint",
