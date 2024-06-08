@@ -18,7 +18,7 @@
 
   - `@solana/web3.js` (sdk for js)
 
-![alt text](image.png)
+![alt text](APPLICATION_ARCHITECTURE.png)
 
 ## Development Flow
 
