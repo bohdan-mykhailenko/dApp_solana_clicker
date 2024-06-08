@@ -2,15 +2,18 @@
   "name": "solana-app",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
+    "build:web": "turbo run build --filter=web",
+    "dev:web": "turbo run dev --filter=web",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "husky": "9.0.11",
     "prettier": "^3.2.5",
+    "syncpack": "^12.3.0",
     "turbo": "latest"
   },
   "packageManager": "pnpm@8.15.6",
