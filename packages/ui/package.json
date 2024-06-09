@@ -15,7 +15,11 @@
   "exports": {
     "./anchor-client": "./src/anchor-client/index.ts",
     "./components": "./src/components/index.ts",
-    "./providers": "./src/providers/index.ts"
+    "./components/server-rendered": "./src/components/server-rendered/index.ts",
+    "./i18n": "./src/i18n/index.ts",
+    "./providers": "./src/providers/index.ts",
+    "./types": "./src/types/index.ts",
+    "./utils": "./src/utils/index.ts"
   },
   "private": true,
   "scripts": {
@@ -30,6 +34,12 @@
     "@solana/wallet-adapter-react-ui": "^0.9.35",
     "@solana/wallet-adapter-wallets": "^0.19.32",
     "@solana/web3.js": "^1.92.3",
-    "react": "18.2.0"
+    "i18next": "^23.11.5",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "i18next-resources-to-backend": "^1.2.1",
+    "next": "14.2.3",
+    "react": "18.2.0",
+    "react-cookie": "^7.1.4",
+    "react-i18next": "^14.1.2"
   }
 }
