@@ -7,11 +7,19 @@ import { useWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 import { LeaderboardItem, anchorCLient } from "@repo/ui/anchor-client";
-import { FAQItem, Leaderboard, ExternalLink } from "@repo/ui/components";
+import { Leaderboard } from "@repo/ui/components";
 
 import "@repo/tailwind/global-styles";
 
+import "@solana/wallet-adapter-react-ui/styles.css";
+import { useTranslationClient } from "@repo/ui/i18n";
+import { useParams } from "next/navigation";
+
+import { LanguageParams } from "../../types";
+
 export const HomePage = () => {
+  const { language }: LanguageParams = useParams();
+  const { t } = useTranslationClient(language);
   const [clicks, setClicks] = useState(0);
   const [effect, setEffect] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
@@ -20,6 +28,7 @@ export const HomePage = () => {
   const [gameError, setGameError] = useState("");
   const [gameAccountPublicKey, setGameAccountPublicKey] = useState("");
   const [leaders, setLeaders] = useState<LeaderboardItem[]>([]);
+  const [isClientSide, setIsClientSide] = useState(false);
 
   const { connected } = useWallet();
   const network = WalletAdapterNetwork.Devnet;
@@ -96,10 +105,16 @@ export const HomePage = () => {
     })();
   }, [wallet, endpoint]);
 
+  useEffect(() => {
+    setIsClientSide(true);
+  }, []);
+
   return (
     <div className="flex items-center flex-col sm:p-4 p-1">
       <div className="navbar mb-2 bg-base-300 text-base-content rounded-box sm:p-4">
-        <div className="flex-1 text-xl font-mono">Solana Clicker</div>
+        <div className="flex-1 text-xl font-mono">
+          {isClientSide && t("applicationTitle")}
+        </div>
         <div>
           <WalletMultiButton />
         </div>
@@ -200,164 +215,6 @@ export const HomePage = () => {
           )}
         </div>
       </div>
-
-      <a id="faqs"></a>
-      <footer className="w-full mt-24 p-3 sm:w-3/4 xl:w-2/3 text-xs">
-        <div className="text-2xl text-center">FAQs</div>
-
-        <FAQItem faq="Is this a real game?">
-          <>
-            <p>
-              Yes, sort of. This game is being developed to learn and
-              demonstrate techniques for building apps that interact with Solana
-              programs and Solana NFTs. It&apos;s in the form of a game with
-              very simple rules.
-            </p>
-            <p className="mt-3">
-              All code is available open-source at{" "}
-              <ExternalLink
-                href="https://github.com/briangershon/solana-clicker-game"
-                text="github.com/briangershon/solana-clicker-game"
-              />
-              . Please visit if you&apos;d like to learn more, or add features.
-            </p>
-          </>
-        </FAQItem>
-
-        <FAQItem faq="Which web browsers are supported?">
-          <>
-            This game should run on any browser that support Web3 and a Solana
-            wallet. Officially tested on desktop Firefox and desktop Chrome.
-          </>
-        </FAQItem>
-
-        <FAQItem faq="What are the rules of this game?">
-          <>
-            <p>The goal is to be the player with the most clicks.</p>
-
-            <p className="mt-3">
-              Today players can only acquire clicks manually. The future plan is
-              to grow this into a full-fledged Clicker game where players earn
-              auto-clickers by purchasing NFTs. Each NFT will automatically
-              increase a player&apos;s points automatically.
-            </p>
-          </>
-        </FAQItem>
-
-        <a id="wallet"></a>
-        <FAQItem faq="How do I select a wallet and play the game?">
-          <>
-            <p>
-              This game runs in a desktop web-browser which connects directly
-              with the Solana blockchain. The blockchain is like a public
-              database that&apos;s keeping track of your score.
-            </p>
-            <p className="mt-3">
-              To connect to a blockchain, you need a wallet. Phantom is a Solana
-              wallet that installs on your browser, though there are many
-              choices. Visit{" "}
-              <ExternalLink
-                href="https://docs.solana.com/wallet-guide"
-                text="Solana Wallet Guide"
-              />{" "}
-              for more help. We support Phantom, Solflare, Torus, Glow and
-              Slope. Let us know if your favorite wallet is not on the list.
-            </p>
-            <p className="mt-3">
-              Once you have a wallet, and you&apos;ve created your account in
-              the wallet, you can now choose{" "}
-              <span className="font-bold">select wallet</span> to connect and
-              play.
-            </p>
-            <p className="mt-3 text-secondary">
-              {" "}
-              <span>Important:</span>{" "}
-            </p>
-            <ul className="mt-3 list-disc ml-5 text-secondary">
-              <li>
-                This app is running on the Solana&apos;s{" "}
-                <span className="font-bold">devnet</span> chain and not the
-                default <span className="font-bold">mainnet</span>.
-              </li>
-              <li>
-                This means you don&apos;t need to buy real SOL. Instead this app
-                will automatically airdrop you one test SOL for free if you have
-                less than 1 test SOL in your wallet.
-              </li>
-              {/* <li>
-                You need to make one change in your wallet. You can still the
-                same same account as <span className="font-bold">mainnet</span>,
-                but you need to switch to{" "}
-                <span className="font-bold">devnet</span> instead of the default{" "}
-                <span className="font-bold">mainnet</span>. If using Phantom
-                Wallet here's how to{" "}
-                <ExternalLink
-                  href="https://hello-17.gitbook.io/crema-devnet-test-guide/switch-your-solana-wallet-to-devnet"
-                  text="Switch Your Solana Wallet to Devnet"
-                />
-                .
-              </li> */}
-            </ul>
-          </>
-        </FAQItem>
-
-        <a id="devnet"></a>
-        <FAQItem faq="What is devnet?">
-          <>
-            <p>
-              Solana has two networks. <span className="font-bold">devnet</span>{" "}
-              is for experimentation and{" "}
-              <span className="font-bold">mainnet</span> is for production apps.
-              Currently this app is running on{" "}
-              <span className="font-bold">devnet</span>.
-            </p>
-            <p className="mt-3">
-              See &quot;
-              <a href="#wallet" className="underline">
-                How do I select a wallet and play the game?
-              </a>
-              &quot; FAQ for more info.
-            </p>
-          </>
-        </FAQItem>
-
-        <FAQItem faq="What is Solana?">
-          <>
-            &quot;Solana is a decentralized blockchain built to enable scalable,
-            user-friendly apps for the world.&quot; (from{" "}
-            <ExternalLink href="https://solana.com/" text="solana.com" />)
-          </>
-        </FAQItem>
-        <FAQItem faq="How can I contribute to this open-source project?">
-          <p>
-            You can contribute in the form of feedback, marketing, design,
-            feature development, fixing bugs, or writing documentation. Please
-            visit our{" "}
-            <ExternalLink
-              href="https://github.com/briangershon/solana-clicker-game/issues"
-              text="issues board"
-            />{" "}
-            or{" "}
-            <ExternalLink
-              href="https://github.com/briangershon/solana-clicker-game/milestones"
-              text="milestones"
-            />
-            .
-          </p>
-        </FAQItem>
-        <FAQItem faq="How do I build my own application like this on Solana?">
-          <p>
-            This project is open-source and provides working examples of code
-            for building web apps that run on the Solana blockchain. Learn more
-            at{" "}
-            <ExternalLink
-              href="https://github.com/briangershon/solana-clicker-game"
-              text="github.com/briangershon/solana-clicker-game"
-            />
-            .
-          </p>
-        </FAQItem>
-      </footer>
     </div>
   );
 };

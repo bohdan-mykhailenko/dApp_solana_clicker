@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { dir } from "i18next";
 
 import {
   ConnectionProvider,
   WalletModalProvider,
   WalletProvider,
 } from "@repo/ui/providers";
+import { applicationLanguages } from "@repo/ui/i18n";
+import { LanguageSwitcher } from "@repo/ui/components/server-rendered";
 
-import "@solana/wallet-adapter-react-ui/styles.css";
+export async function generateStaticParams() {
+  return applicationLanguages.map((language) => ({ language }));
+}
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,14 +50,17 @@ export const metadata: Metadata = {
   // </Head>
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params: { language },
 }: Readonly<{
   children: React.ReactNode;
+  params: { language: string };
 }>) {
   return (
-    <html lang="en">
+    <html lang={language} dir={dir(language)}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <LanguageSwitcher language={language} />
         <ConnectionProvider>
           <WalletProvider>
             <WalletModalProvider>{children}</WalletModalProvider>
