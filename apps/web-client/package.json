@@ -1,0 +1,30 @@
+{
+  "name": "web-client",
+  "version": "1.0.0",
+  "dependencies": {
+    "@repo/ui": "workspace:^",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "next": "14.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:^",
+    "@repo/tailwind": "workspace:^",
+    "@repo/typescript-config": "workspace:^",
+    "@repo/ui": "workspace:^",
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "8.57.0",
+    "eslint-config-next": "15.0.0-rc.0",
+    "typescript": "^5.4.5"
+  },
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbo",
+    "lint": "next lint",
+    "start": "next start"
+  }
+}
