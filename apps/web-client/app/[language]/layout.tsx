@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Tourney, Zen_Dots } from "next/font/google";
+import { Zen_Dots } from "next/font/google";
 import { dir } from "i18next";
 
 import {
@@ -8,17 +8,6 @@ import {
   WalletProvider,
 } from "@repo/ui/providers";
 import { applicationLanguages } from "@repo/ui/i18n";
-
-const tourney = Tourney({
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const zenDots = Zen_Dots({
-  weight: ["400"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export async function generateStaticParams() {
   return applicationLanguages.map((language) => ({ language }));
@@ -50,6 +39,12 @@ export const metadata: Metadata = {
   //   <meta name="twitter:image" content={metaImageUrl} />
   // </Head>
 };
+
+const zenDots = Zen_Dots({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default async function RootLayout({
   children,
