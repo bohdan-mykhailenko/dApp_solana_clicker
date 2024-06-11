@@ -7,7 +7,7 @@ import { useWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 import { LeaderboardItem, anchorCLient } from "@repo/ui/anchor-client";
-import { Leaderboard } from "@repo/ui/components";
+import { LanguageSwitcher, Leaderboard } from "@repo/ui/components";
 
 import "@repo/tailwind/global-styles";
 
@@ -111,6 +111,8 @@ export const HomePage = () => {
 
   return (
     <div className="flex items-center flex-col sm:p-4 p-1">
+      <LanguageSwitcher currentLanguage={language} />
+
       <div className="navbar mb-2 bg-base-300 text-base-content rounded-box sm:p-4">
         <div className="flex-1 text-xl font-mono">
           {isClientSide && t("applicationTitle")}
