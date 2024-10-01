@@ -1,3 +1,6 @@
 {
-  "applicationTitle": "Solana dApp made with ❤️ | Bohdan, Misha, Vitaliy"
+  "home": {
+    "applicationTitle": "Solana dApp made with ❤️ | Bohdan, Misha, Vitaliy",
+    "clickerButton": "Click on me"
+  }
 }

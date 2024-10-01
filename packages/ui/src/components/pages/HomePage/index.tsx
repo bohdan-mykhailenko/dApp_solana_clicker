@@ -3,23 +3,27 @@ import { useState, useEffect, useMemo } from "react";
 import { clusterApiUrl } from "@solana/web3.js";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { useWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
-
+import "@solana/wallet-adapter-react-ui/styles.css";
+import { useParams } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 import { LeaderboardItem, anchorCLient } from "@repo/ui/anchor-client";
-import { LanguageSwitcher, Leaderboard } from "@repo/ui/components";
-
+import {
+  ClickerButton,
+  LanguageSwitcher,
+  Leaderboard,
+} from "@repo/ui/components";
 import "@repo/tailwind/global-styles";
-
-import "@solana/wallet-adapter-react-ui/styles.css";
 import { useTranslationClient } from "@repo/ui/i18n";
-import { useParams } from "next/navigation";
 
 import { LanguageParams } from "../../types";
+
+const network = WalletAdapterNetwork.Devnet;
 
 export const HomePage = () => {
   const { language }: LanguageParams = useParams();
   const { t } = useTranslationClient(language);
+
   const [clicks, setClicks] = useState(0);
   const [effect, setEffect] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
@@ -31,12 +35,13 @@ export const HomePage = () => {
   const [isClientSide, setIsClientSide] = useState(false);
 
   const { connected } = useWallet();
-  const network = WalletAdapterNetwork.Devnet;
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
   const wallet = useAnchorWallet();
 
-  async function handleClick() {
+  const endpoint = useMemo(() => clusterApiUrl(network), []);
+
+  const handleClick = async () => {
     setGameError("");
+
     if (wallet) {
       try {
         await anchorCLient.saveClick({
@@ -44,18 +49,19 @@ export const HomePage = () => {
           endpoint,
           gameAccountPublicKey,
         });
+
         setClicks(clicks + 1);
         setEffect(true);
-      } catch (e) {
-        if (e instanceof Error) {
-          setGameError(e.message);
-        }
+      } catch (error: any) {
+        setGameError(error.message);
       }
     }
-  }
+  };
 
   useEffect(() => {
-    async function initGame() {
+    setIsConnected(connected);
+
+    (async () => {
       if (wallet) {
         const gameState = await anchorCLient.getCurrentGame({
           wallet,
@@ -75,14 +81,12 @@ export const HomePage = () => {
         setSolanaExplorerLink("");
         setGameError("");
       }
-    }
-    setIsConnected(connected);
-    initGame();
-  }, [connected, endpoint, network, wallet, gameAccountPublicKey]);
+    })();
+  }, [connected, endpoint, wallet, gameAccountPublicKey]);
 
   // airdrop test SOL if on devnet and player has less than 1 test SOL
   useEffect(() => {
-    async function fetchTestSol(): Promise<void> {
+    (async () => {
       if (wallet) {
         try {
           await anchorCLient.airdrop({ wallet, endpoint });
@@ -92,13 +96,12 @@ export const HomePage = () => {
           );
         }
       }
-    }
-    fetchTestSol();
+    })();
   }, [connected, wallet, endpoint]);
 
-  // For leaderboard, persist expensive "retrieve all game data" via useState()
+  // for leaderboard, persist expensive "retrieve all game data" via useState()
   useEffect(() => {
-    (async function getLeaderboardData() {
+    (async () => {
       if (wallet) {
         setLeaders(await anchorCLient.getLeaderboard({ wallet, endpoint }));
       }
@@ -115,13 +118,15 @@ export const HomePage = () => {
 
       <div className="navbar mb-2 bg-base-300 text-base-content rounded-box sm:p-4">
         <div className="flex-1 text-xl font-mono">
-          {isClientSide && t("applicationTitle")}
+          {isClientSide && t("home.applicationTitle")}
         </div>
+
         <div>
           <WalletMultiButton />
         </div>
-        <div className="badge badge-accent badge-outline flex-none ml-2">
-          <a href="#devnet">devnet</a>
+
+        <div className="badge badge-primary badge-outline flex-none ml-2">
+          {network}
         </div>
       </div>
 
@@ -156,19 +161,16 @@ export const HomePage = () => {
                   }}
                   className={`${effect && "animate-wiggle"}`}
                 >
-                  {clicks} clicks
+                  {clicks}
                 </div>
               )}
             </div>
-            <button
-              disabled={!isGameReady}
-              onClick={() => {
-                handleClick();
-              }}
-              className="btn btn-lg bg-primary hover:bg-primary-focus text-primary-content border-primary-focus border-4 h-36 w-36 rounded-full"
-            >
-              Click Me
-            </button>
+
+            <ClickerButton
+              onClick={handleClick}
+              isGameReady={isGameReady}
+              text={t("home.clickerButton")}
+            />
 
             {isGameReady && (
               <div>

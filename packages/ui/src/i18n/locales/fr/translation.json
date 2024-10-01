@@ -1,3 +1,6 @@
 {
-  "applicationTitle": "Solana dApp qui a été créée avec ❤️ | Bohdan, Misha, Vitaliy"
+  "home": {
+    "applicationTitle": "Solana dApp qui a été créée avec ❤️ | Bohdan, Misha, Vitaliy",
+    "clickerButton": "France"
+  }
 }
