@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import acceptLanguage from "accept-language";
 
-import {
-  fallbackLanguage,
-  applicationLanguages,
-  cookieName,
-} from "@repo/ui/i18n";
+import { fallbackLanguage, applicationLanguages, cookieName } from "@repo/i18n";
 
 acceptLanguage.languages(applicationLanguages);
 

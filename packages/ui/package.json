@@ -16,7 +16,6 @@
     "./anchor-client": "./src/anchor-client/index.ts",
     "./components": "./src/components/index.ts",
     "./components/server-rendered": "./src/components/server-rendered/index.ts",
-    "./i18n": "./src/i18n/index.ts",
     "./providers": "./src/providers/index.ts",
     "./types": "./src/types/index.ts",
     "./utils": "./src/utils/index.ts"
@@ -29,6 +28,7 @@
   "dependencies": {
     "@project-serum/anchor": "^0.26.0",
     "@repo/tailwind": "workspace:^",
+    "@repo/i18n": "workspace:^",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
@@ -36,13 +36,8 @@
     "@solana/web3.js": "^1.92.3",
     "encoding": "^0.1.13",
     "lokijs": "1.x",
-    "pino-pretty": "^11.1.0",
-    "i18next": "^23.11.5",
-    "i18next-browser-languagedetector": "^8.0.0",
-    "i18next-resources-to-backend": "^1.2.1",
     "next": "14.2.3",
-    "react": "18.2.0",
-    "react-cookie": "^7.1.4",
-    "react-i18next": "15.0.2"
+    "pino-pretty": "^11.1.0",
+    "react": "18.2.0"
   }
 }

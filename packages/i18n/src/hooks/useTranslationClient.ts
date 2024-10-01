@@ -2,15 +2,13 @@
 
 import { useEffect, useState } from "react";
 import i18next from "i18next";
-import {
-  initReactI18next,
-  useTranslation as useTranslationOrg,
-} from "react-i18next";
+import { useTranslation } from "next-i18next";
+import { initReactI18next } from "react-i18next";
 import { useCookies } from "react-cookie";
 import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import { isServerSide } from "@repo/ui/utils";
+import { isServerSide } from "@repo/shared/utils";
 
 import {
   getOptions,
@@ -36,7 +34,7 @@ i18next
     detection: {
       order: ["path", "htmlTag", "cookie", "navigator"],
     },
-    preload: isServerSide ? applicationLanguages : [],
+    preload: isServerSide ? applicationLanguages : false,
     interpolation: {
       escapeValue: false,
     },
@@ -48,7 +46,7 @@ export function useTranslationClient(
   options?: Options
 ) {
   const [cookies, setCookie] = useCookies([cookieName]);
-  const translationResponse = useTranslationOrg(nameSpace, options);
+  const translationResponse = useTranslation(nameSpace, options);
   const { i18n } = translationResponse;
 
   const [activeLanguage, setActiveLanguage] = useState(i18n.resolvedLanguage);

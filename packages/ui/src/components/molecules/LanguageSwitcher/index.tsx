@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { applicationLanguages } from "@repo/ui/i18n";
+import { applicationLanguages } from "@repo/i18n";
 
 interface LanguageSwitcherProps {
   currentLanguage: string;

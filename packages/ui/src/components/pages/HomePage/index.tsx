@@ -4,7 +4,6 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { useWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
 import "@solana/wallet-adapter-react-ui/styles.css";
-import { useParams } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 import { LeaderboardItem, anchorCLient } from "@repo/ui/anchor-client";
@@ -14,14 +13,11 @@ import {
   Leaderboard,
 } from "@repo/ui/components";
 import "@repo/tailwind/global-styles";
-import { useTranslationClient } from "@repo/ui/i18n";
-
-import { LanguageParams } from "../../types";
+import { useTranslationClient } from "@repo/i18n";
 
 const network = WalletAdapterNetwork.Devnet;
 
-export const HomePage = () => {
-  const { language }: LanguageParams = useParams();
+export const HomePage = ({ language }: { language: string }) => {
   const { t } = useTranslationClient(language);
 
   const [clicks, setClicks] = useState(0);
