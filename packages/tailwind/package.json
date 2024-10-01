@@ -12,5 +12,8 @@
     "./postcss-config": "./postcss.config.mjs",
     "./tailwind-config": "./tailwind.config.ts"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.13"
+  }
 }

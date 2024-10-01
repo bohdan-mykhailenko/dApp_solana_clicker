@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Zen_Dots } from "next/font/google";
 import { dir } from "i18next";
 
 import {
@@ -8,20 +8,10 @@ import {
   WalletProvider,
 } from "@repo/ui/providers";
 import { applicationLanguages } from "@repo/ui/i18n";
-import { LanguageSwitcher } from "@repo/ui/components/server-rendered";
 
 export async function generateStaticParams() {
   return applicationLanguages.map((language) => ({ language }));
 }
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
 
 export const metadata: Metadata = {
   title: "Solana dApp",
@@ -50,6 +40,12 @@ export const metadata: Metadata = {
   // </Head>
 };
 
+const zenDots = Zen_Dots({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default async function RootLayout({
   children,
   params: { language },
@@ -59,8 +55,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang={language} dir={dir(language)}>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <LanguageSwitcher language={language} />
+      <body className={zenDots.className}>
         <ConnectionProvider>
           <WalletProvider>
             <WalletModalProvider>{children}</WalletModalProvider>
