@@ -7,7 +7,7 @@ import {
   WalletModalProvider,
   WalletProvider,
 } from "@repo/ui/providers";
-import { applicationLanguages } from "@repo/ui/i18n";
+import { applicationLanguages } from "@repo/i18n";
 
 export async function generateStaticParams() {
   return applicationLanguages.map((language) => ({ language }));
